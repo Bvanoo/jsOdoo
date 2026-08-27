@@ -237,34 +237,67 @@
 // console.log(indCopy);
 
 
-const listePerso = document.getElementById('listePerso');
-const perso = ['Balthazar', 'Della', 'Donald', 'Riri', 'Zaza'];
+// const listePerso = document.getElementById('listePerso');
+// const perso = ['Balthazar', 'Della', 'Donald', 'Riri', 'Zaza'];
 
-perso.forEach((nom,index)=>{
-    const li = document.createElement('li');
-    li.textContent = `Position ${index + 1 } : ${nom}`
-    listePerso.append(li);
-})
+// perso.forEach((nom,index)=>{
+//     const li = document.createElement('li');
+//     li.textContent = `Position ${index + 1 } : ${nom}`
+//     listePerso.append(li);
+// })
 
-const objPerso = {lastname:'Duck', firstname:'Balt', city:'Canardville'};
+// const objPerso = {lastname:'Duck', firstname:'Balt', city:'Canardville'};
 
-for(const cle in objPerso){
-    const p = document.createElement('p');
-    p.textContent = `${cle} : ${objPerso[cle]}`
-    document.body.appendChild(p)
+// for(const cle in objPerso){
+//     const p = document.createElement('p');
+//     p.textContent = `${cle} : ${objPerso[cle]}`
+//     document.body.appendChild(p)
+// }
+
+// const listeProd = document.getElementById('listeProd')
+
+// const prod = [
+//     {nom : 'Smash', description : 'Jeu de combat', prix : 80},
+//     {nom : 'Ascension', description : 'Serveur privé wow qui met a l amende Blizzar', prix : 0},
+//     {nom : 'Gta6', description : ' Un jeu beaucoup trop attendu par la plupart ??', prix : 99999}
+// ];
+
+// for (const produit of prod){
+//     const li = document.createElement('li');
+//     const desc = produit.description ?? `Pas de description dispo`;
+//     li.textContent = `${produit.nom} ${desc}  - ${produit.prix} €`
+//     listeProd.append(li)
+// }
+
+function mult(a, b=1){
+    return a*b
 }
 
-const listeProd = document.getElementById('listeProd')
+console.log(mult(4,2));
+console.log(mult(4));
 
-const prod = [
-    {nom : 'Smash', description : 'Jeu de combat', prix : 80},
-    {nom : 'Ascension', description : 'Serveur privé wow qui met a l amende Blizzar', prix : 0},
-    {nom : 'Gta6', description : ' Un jeu beaucoup trop attendu par la plupart ??', prix : 99999}
-];
-
-for (const produit of prod){
-    const li = document.createElement('li');
-    const desc = produit.description ?? `Pas de description dispo`;
-    li.textContent = `${produit.nom} ${desc}  - ${produit.prix} €`
-    listeProd.append(li)
+function somme(...nb){
+    return nb.reduce((acc, valeur) => acc + valeur, 0)
 }
+
+console.log(somme(2,4,6));
+
+
+const multi = (a, b=1) => a*b;
+console.log(multi(4,2));
+console.log(multi(4));
+
+function facto(n){
+    if(n<=1){
+        return 1;
+    }
+    return n *facto(n-1)
+}
+
+console.log(facto(5));
+console.log(facto(0));
+
+
+
+
+
