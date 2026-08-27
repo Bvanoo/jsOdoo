@@ -1,8 +1,4 @@
-.colorByJs{
-    color: red;
-}
-.fontByJs{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: blue;
-    font-style: oblique;
+.erreur { 
+    color: red; 
+    display: none;
 }

@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 // let prenom = prompt("Quel est votre prénom");
 // console.log(`Bonjour ${prenom}`);
 
@@ -141,4 +141,41 @@
 //     }
 // });
 
+const inpFruit = document.getElementById('input-fruit');
+const btnAdd = document.getElementById('btnAdd');
+const btnDeleteAll = document.getElementById('btnDeleteAll');
+const maListe = document.getElementById('maListe');
+const msgError = document.getElementById('msgError');
 
+
+btnAdd.addEventListener('click' , () =>{
+    const nomFruit =inpFruit.value.trim();
+
+    if(nomFruit === ""){
+        msgError.style.display = 'block';
+        return;
+    }
+    
+    msgError.style.display = 'none';
+
+    const liFruit = document.createElement('li');
+    liFruit.textContent = `${nomFruit} `;
+
+    const btnDelElem = document.createElement('button');
+    btnDelElem.textContent = 'Suppr.'
+    btnDelElem.addEventListener('click', () =>{
+        liFruit.remove();
+    })
+
+    liFruit.appendChild(btnDelElem);
+    maListe.appendChild(liFruit);
+
+    inpFruit.value = "";
+    inpFruit.focus();
+})
+
+btnDeleteAll.addEventListener('click', ()=>{
+    // maListe.replaceChild();
+    maListe.innerHTML = '';
+    msgError.style.display = 'none'
+})
