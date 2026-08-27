@@ -180,35 +180,61 @@
 //     msgError.style.display = 'none'
 // })
 
-const grid = document.getElementById('grid');
-const btnG = document.getElementById('btnG');
-const btnDel = document.getElementById('btnDel');
+// const grid = document.getElementById('grid');
+// const btnG = document.getElementById('btnG');
+// const btnDel = document.getElementById('btnDel');
 
-btnG.addEventListener('click', ()=>{
-    grid.innerHTML = '';
+// btnG.addEventListener('click', ()=>{
+//     grid.innerHTML = '';
 
-    for( let i = 1; i <= 25; i++){
-        const div = document.createElement('div');
-        div.classList.add('case');
-        div.textContent = i;
-        grid.appendChild(div)
+//     for( let i = 1; i <= 25; i++){
+//         const div = document.createElement('div');
+//         div.classList.add('case');
+//         div.textContent = i;
+//         grid.appendChild(div)
 
-    }
-    const cases = grid.children;
-    let index = 0;
+//     }
+//     const cases = grid.children;
+//     let index = 0;
     
-    while(index< cases.length){
-        const numero = parseInt(cases[index].textContent, 10);
+//     while(index< cases.length){
+//         const numero = parseInt(cases[index].textContent, 10);
     
-        if(numero%3 === 0){
-            cases[index].classList.add('rouge')
-        }else{
-            cases[index].classList.add('vert')
-        }
-        index++
-    }
-})
+//         if(numero%3 === 0){
+//             cases[index].classList.add('rouge')
+//         }else{
+//             cases[index].classList.add('vert')
+//         }
+//         index++
+//     }
+// })
 
-btnDel.addEventListener('click', () =>{
-    grid.innerHTML = '';
-})
+// btnDel.addEventListener('click', () =>{
+//     grid.innerHTML = '';
+// })
+
+let tab = [5, 12, 3, 8, 1, 2, 7];
+
+tab.push(15);
+tab.unshift(9);
+
+tab.sort((a,b) => a-b).reverse();
+
+tab.shift();
+tab.pop();
+
+const containEight = tab.includes(8);
+
+const tabCopy = tab.filter(t => t<10).map(t => t*2)
+
+const indOg = tab.findIndex(t=> t>= 5 && t<=10);
+const indCopy = tabCopy.findIndex(t => t >= 5 && t <=10);
+console.table(tab);
+console.table(tabCopy);
+
+console.log(containEight);
+console.log(indOg);
+console.log(indCopy);
+
+
+
