@@ -141,41 +141,74 @@
 //     }
 // });
 
-const inpFruit = document.getElementById('input-fruit');
-const btnAdd = document.getElementById('btnAdd');
-const btnDeleteAll = document.getElementById('btnDeleteAll');
-const maListe = document.getElementById('maListe');
-const msgError = document.getElementById('msgError');
+// const inpFruit = document.getElementById('input-fruit');
+// const btnAdd = document.getElementById('btnAdd');
+// const btnDeleteAll = document.getElementById('btnDeleteAll');
+// const maListe = document.getElementById('maListe');
+// const msgError = document.getElementById('msgError');
 
 
-btnAdd.addEventListener('click' , () =>{
-    const nomFruit =inpFruit.value.trim();
+// btnAdd.addEventListener('click' , () =>{
+//     const nomFruit =inpFruit.value.trim();
 
-    if(nomFruit === ""){
-        msgError.style.display = 'block';
-        return;
-    }
+//     if(nomFruit === ""){
+//         msgError.style.display = 'block';
+//         return;
+//     }
     
-    msgError.style.display = 'none';
+//     msgError.style.display = 'none';
 
-    const liFruit = document.createElement('li');
-    liFruit.textContent = `${nomFruit} `;
+//     const liFruit = document.createElement('li');
+//     liFruit.textContent = `${nomFruit} `;
 
-    const btnDelElem = document.createElement('button');
-    btnDelElem.textContent = 'Suppr.'
-    btnDelElem.addEventListener('click', () =>{
-        liFruit.remove();
-    })
+//     const btnDelElem = document.createElement('button');
+//     btnDelElem.textContent = 'Suppr.'
+//     btnDelElem.addEventListener('click', () =>{
+//         liFruit.remove();
+//     })
 
-    liFruit.appendChild(btnDelElem);
-    maListe.appendChild(liFruit);
+//     liFruit.appendChild(btnDelElem);
+//     maListe.appendChild(liFruit);
 
-    inpFruit.value = "";
-    inpFruit.focus();
+//     inpFruit.value = "";
+//     inpFruit.focus();
+// })
+
+// btnDeleteAll.addEventListener('click', ()=>{
+//     // maListe.replaceChild();
+//     maListe.innerHTML = '';
+//     msgError.style.display = 'none'
+// })
+
+const grid = document.getElementById('grid');
+const btnG = document.getElementById('btnG');
+const btnDel = document.getElementById('btnDel');
+
+btnG.addEventListener('click', ()=>{
+    grid.innerHTML = '';
+
+    for( let i = 1; i <= 25; i++){
+        const div = document.createElement('div');
+        div.classList.add('case');
+        div.textContent = i;
+        grid.appendChild(div)
+
+    }
+    const cases = grid.children;
+    let index = 0;
+    
+    while(index< cases.length){
+        const numero = parseInt(cases[index].textContent, 10);
+    
+        if(numero%3 === 0){
+            cases[index].classList.add('rouge')
+        }else{
+            cases[index].classList.add('vert')
+        }
+        index++
+    }
 })
 
-btnDeleteAll.addEventListener('click', ()=>{
-    // maListe.replaceChild();
-    maListe.innerHTML = '';
-    msgError.style.display = 'none'
+btnDel.addEventListener('click', () =>{
+    grid.innerHTML = '';
 })
