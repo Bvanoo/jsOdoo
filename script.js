@@ -213,28 +213,58 @@
 //     grid.innerHTML = '';
 // })
 
-let tab = [5, 12, 3, 8, 1, 2, 7];
+// let tab = [5, 12, 3, 8, 1, 2, 7];
 
-tab.push(15);
-tab.unshift(9);
+// tab.push(15);
+// tab.unshift(9);
 
-tab.sort((a,b) => a-b).reverse();
+// tab.sort((a,b) => a-b).reverse();
 
-tab.shift();
-tab.pop();
+// tab.shift();
+// tab.pop();
 
-const containEight = tab.includes(8);
+// const containEight = tab.includes(8);
 
-const tabCopy = tab.filter(t => t<10).map(t => t*2)
+// const tabCopy = tab.filter(t => t<10).map(t => t*2)
 
-const indOg = tab.findIndex(t=> t>= 5 && t<=10);
-const indCopy = tabCopy.findIndex(t => t >= 5 && t <=10);
-console.table(tab);
-console.table(tabCopy);
+// const indOg = tab.findIndex(t=> t>= 5 && t<=10);
+// const indCopy = tabCopy.findIndex(t => t >= 5 && t <=10);
+// console.table(tab);
+// console.table(tabCopy);
 
-console.log(containEight);
-console.log(indOg);
-console.log(indCopy);
+// console.log(containEight);
+// console.log(indOg);
+// console.log(indCopy);
 
 
+const listePerso = document.getElementById('listePerso');
+const perso = ['Balthazar', 'Della', 'Donald', 'Riri', 'Zaza'];
 
+perso.forEach((nom,index)=>{
+    const li = document.createElement('li');
+    li.textContent = `Position ${index + 1 } : ${nom}`
+    listePerso.append(li);
+})
+
+const objPerso = {lastname:'Duck', firstname:'Balt', city:'Canardville'};
+
+for(const cle in objPerso){
+    const p = document.createElement('p');
+    p.textContent = `${cle} : ${objPerso[cle]}`
+    document.body.appendChild(p)
+}
+
+const listeProd = document.getElementById('listeProd')
+
+const prod = [
+    {nom : 'Smash', description : 'Jeu de combat', prix : 80},
+    {nom : 'Ascension', description : 'Serveur privé wow qui met a l amende Blizzar', prix : 0},
+    {nom : 'Gta6', description : ' Un jeu beaucoup trop attendu par la plupart ??', prix : 99999}
+];
+
+for (const produit of prod){
+    const li = document.createElement('li');
+    const desc = produit.description ?? `Pas de description dispo`;
+    li.textContent = `${produit.nom} ${desc}  - ${produit.prix} €`
+    listeProd.append(li)
+}
