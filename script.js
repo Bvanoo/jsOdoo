@@ -155,7 +155,7 @@
 //         msgError.style.display = 'block';
 //         return;
 //     }
-    
+
 //     msgError.style.display = 'none';
 
 //     const liFruit = document.createElement('li');
@@ -196,10 +196,10 @@
 //     }
 //     const cases = grid.children;
 //     let index = 0;
-    
+
 //     while(index< cases.length){
 //         const numero = parseInt(cases[index].textContent, 10);
-    
+
 //         if(numero%3 === 0){
 //             cases[index].classList.add('rouge')
 //         }else{
@@ -269,35 +269,237 @@
 //     listeProd.append(li)
 // }
 
-function mult(a, b=1){
-    return a*b
-}
+// function mult(a, b=1){
+//     return a*b
+// }
 
-console.log(mult(4,2));
-console.log(mult(4));
+// console.log(mult(4,2));
+// console.log(mult(4));
 
-function somme(...nb){
-    return nb.reduce((acc, valeur) => acc + valeur, 0)
-}
+// function somme(...nb){
+//     return nb.reduce((acc, valeur) => acc + valeur, 0)
+// }
 
-console.log(somme(2,4,6));
+// console.log(somme(2,4,6));
 
 
-const multi = (a, b=1) => a*b;
-console.log(multi(4,2));
-console.log(multi(4));
+// const multi = (a, b=1) => a*b;
+// console.log(multi(4,2));
+// console.log(multi(4));
 
-function facto(n){
-    if(n<=1){
-        return 1;
+// function facto(n){
+//     if(n<=1){
+//         return 1;
+//     }
+//     return n *facto(n-1)
+// }
+
+// console.log(facto(5));
+// console.log(facto(0));
+
+
+// const horloge = document.getElementById('Horloge');
+// const pause = document.getElementById('Pause');
+// const reprendre = document.getElementById('Reprendre');
+
+// let timerId = null;
+
+// function setHorloge(){
+//     const now = new Date();
+
+//     const H = String(now.getHours()).padStart(2,'0');
+//     const M = String(now.getMinutes()).padStart(2,'0');
+//     const S = String(now.getSeconds()).padStart(2,'0');
+//     horloge.textContent = `${H}:${M}:${S}`
+// }
+
+// function start() {
+//     if(!timerId){
+//         setHorloge();
+//         timerId = setInterval(setHorloge,1000);
+//     }
+// }
+
+// function stop(){
+//     if(timerId){
+//         clearInterval(timerId);
+//         timerId = null;
+//     }
+// }
+
+// pause.addEventListener('click', stop)
+// reprendre.addEventListener('click', start)
+
+// start();
+
+// function diviser(a, b) {
+//   if (b === 0) {
+//     throw new Error("Division par zéro impossible.");
+//   }
+//   return a / b;
+// }
+
+// try {
+//   const resultat = diviser(10, 0);
+//   console.log(`Résultat : ${resultat}`);
+// } catch (erreur) {
+//   console.error(`Erreur interceptée : ${erreur.message}`);
+// } finally {
+//   console.log('Opération terminée');
+// }
+
+// function convAsNum(valeur) {
+//   const nombre = Number(valeur);
+
+//   if (Number.isNaN(nombre)) {
+//     throw new TypeError("La valeur fournie n'est pas un nombre valide.");
+//   }
+
+//   if (nombre > Number.MAX_SAFE_INTEGER) {
+//     throw new RangeError(`La valeur dépasse la limite d'entier sécurisé (${Number.MAX_SAFE_INTEGER}).`);
+//   }
+
+//   return nombre;
+// }
+
+// function tryConv(valeur) {
+//   try {
+//     const resultat = convAsNum(valeur);
+//     console.log("Conversion réussie :", resultat);
+//   } catch (erreur) {
+//     if (erreur instanceof TypeError) {
+//       console.error("[TypeError] :", erreur.message);
+//     } else if (erreur instanceof RangeError) {
+//       console.error("[RangeError] :", erreur.message);
+//     } else {
+//       console.error("[Erreur inconnue] :", erreur.message);
+//     }
+//   }
+// }
+
+// tryConv("abc");
+// tryConv("9007199254740992");
+// tryConv("42");
+
+document.addEventListener('DOMContentLoaded', () => {
+    const pokemons = [
+        { id: 25, nom: 'Pikachu' },
+        { id: 4, nom: 'Salamèche' },
+        { id: 7, nom: 'Carapuce' },
+        { id: 1, nom: 'Bulbizarre' },
+        { id: 94, nom: 'Ectoplasma' },
+        { id: 133, nom: 'Évoli' },
+        { id: 143, nom: 'Ronflex' },
+        { id: 150, nom: 'Mewtwo' }
+    ];
+
+    const grid = document.getElementById('grid');
+    const essais = document.getElementById('try');
+    const msgWin = document.getElementById('winMsg');
+    const replay = document.getElementById('replay');
+
+    let cards = [];
+    let firstCard = null;
+    let secondCard = null;
+    let locked = false;
+    let tentatives = 0;
+    let founded = 0;
+
+    function mix(tab) {
+        for (let i = tab.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [tab[i], tab[j]] = [tab[j], tab[i]];
+        }
+        return tab;
     }
-    return n *facto(n-1)
-}
 
-console.log(facto(5));
-console.log(facto(0));
+    function initGame() {
+        grid.innerHTML = '';
+        msgWin.textContent = '';
+        tentatives = 0;
+        founded = 0;
+        firstCard = null;
+        secondCard = null;
+        locked = false;
+        essais.textContent = tentatives;
 
+        cards = mix([...pokemons, ...pokemons]);
 
+        cards.forEach((pkm) => {
+            const card = document.createElement('div');
+            card.classList.add('carte');
+            card.dataset.valeur = pkm.id;
 
+            card.innerHTML = `
+            <div class="carte-inner">
+              <div class="carte-back"></div>
+              <div class="carte-front">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pkm.id}.png" alt="${pkm.nom}">
+              </div>
+            </div>
+          `;
 
+            card.addEventListener('click', flipCard);
+            grid.appendChild(card);
+        });
+    }
 
+    function flipCard() {
+        if (locked) return;
+        if (this === firstCard) return;
+        if (this.classList.contains('trouvee') || this.classList.contains('retournee')) return;
+
+        this.classList.add('retournee');
+
+        if (!firstCard) {
+            firstCard = this;
+            return;
+        }
+
+        secondCard = this;
+        tentatives++;
+        essais.textContent = tentatives;
+
+        checkPair();
+    }
+
+    function checkPair() {
+        const isMatch = firstCard.dataset.valeur === secondCard.dataset.valeur;
+        if (isMatch) {
+            validPair();
+        } else {
+            hideCard();
+        }
+    }
+
+    function validPair() {
+        firstCard.classList.add('trouvee');
+        secondCard.classList.add('trouvee');
+
+        founded++;
+        resetPick();
+
+        if (founded === pokemons.length) {
+            msgWin.innerHTML = `VICTOIRE !<br>Vous avez tout capturé en ${tentatives} essais !`;
+        }
+    }
+
+    function hideCard() {
+        locked = true;
+
+        setTimeout(() => {
+            firstCard.classList.remove('retournee');
+            secondCard.classList.remove('retournee');
+            resetPick();
+        }, 900);
+    }
+
+    function resetPick() {
+        [firstCard, secondCard] = [null, null];
+        locked = false;
+    }
+
+    replay.addEventListener('click', initGame);
+
+    initGame();
+});
